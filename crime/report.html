@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report a Complaint</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #FFFFFF;
+        }
+        .navbar {
+            background-color: #003366;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar img {
+            height: 40px;
+        }
+        .navbar .title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+        .logout-btn {
+            background-color: #FF6600;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .header {
+            background-color: #000000;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            font-size: 1.5rem;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        .vertical-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            max-width: 500px;
+            width: 100%;
+        }
+        .vertical-form label {
+            font-weight: bold;
+        }
+        .vertical-form input, 
+        .vertical-form textarea, 
+        .vertical-form button {
+            padding: 0.5rem;
+            font-size: 1rem;
+        }
+        .vertical-form button {
+            background-color: #003366;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div style="display: flex; align-items: center;">
+            <img src="https://www.shutterstock.com/image-vector/ashok-pillar-symbol-icon-black-600nw-2422191035.jpg" alt="Ashok Pillar">
+            <span class="title">CrimeShield</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="Citizen_Laws.html">Citizen Laws</a>
+            <a href="Contacts.html">Contacts</a>
+        </div>
+        <button class="login-btn"onclick="window.location.href='index.html'">Logout</button>
+    </nav>
+    <header class="header">Report a Complaint</header>
+    <div class="container">
+        <form class="vertical-form" action="https://submit-form.com/l2H2W4IGG">
+            <label for="Name">Name</label>
+            <input id="Name" name="Name" type="text" required>
+            <label for="Phone">Contact Number</label>
+            <input id="Phone" name="Phone" type="text" required>
+            <label for="Crime">Crime Detail</label>
+            <textarea id="Crime" name="Crime" cols="15" rows="5" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

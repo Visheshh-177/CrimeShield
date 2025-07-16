@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOS Activated</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #fce4ec;
+    }
+    video {
+      border: 2px solid #d81b60;
+      border-radius: 8px;
+      margin: 20px;
+      width: 400px;
+    }
+    p {
+      font-size: 16px;
+      color: #333;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #d81b60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>SOS Activated</h1>
+  <video id="video" autoplay></video>
+  <p id="location"></p>
+  <button id="stopButton">Stop and Share</button>
+
+  <script>
+    let mediaRecorder;
+    let recordedChunks = [];
+
+    (async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        document.getElementById('video').srcObject = stream;
+        
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition((position) => {
+            const { latitude, longitude } = position.coords;
+            document.getElementById('location').innerText = `Location: Latitude ${latitude}, Longitude ${longitude}`;
+          }, (error) => {
+            document.getElementById('location').innerText = `Location Error: ${error.message}`;
+          });
+        }
+
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.ondataavailable = event => recordedChunks.push(event.data);
+        mediaRecorder.start();
+      } catch (error) {
+        alert(`Error: ${error.message}`);
+      }
+    })();
+
+    document.getElementById('stopButton').addEventListener('click', () => {
+      mediaRecorder.stop();
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'sos_video.webm';
+        a.click();
+
+        alert('Video recorded and ready for sharing.');
+      };
+    });
+  </script>
+</body>
+</html>

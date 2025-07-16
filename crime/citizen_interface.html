@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrimeShield Dashboard</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .navbar {
+            background-color: #003366;
+            color: white;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .navbar img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        .navbar-title {
+            font-weight: bold;
+            font-size: 20px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            margin: 0 auto;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .header {
+            background-color: #FFFFFF;
+            color: #000000;
+            padding: 20px;
+            text-align: left;
+            font-size: 24px;
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            border-bottom: 2px solid #003366;
+        }
+        .logout-button {
+            background-color: #FF6600;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            border-radius: 10px;
+        }
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .buttons button {
+            background-color: #003366;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            margin: 10px 0;
+            cursor: pointer;
+            font-size: 16px;
+            width: 200px;
+            border-radius: 10px;
+        }
+        .heatmap-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .heatmap-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .heatmap {
+            width: 100%;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div style="display: flex; align-items: center;">
+            <img src="https://www.shutterstock.com/image-vector/ashok-pillar-symbol-icon-black-600nw-2422191035.jpg" alt="Ashok Pillar">
+            <span class="navbar-title">CrimeShield</span>
+        </div>
+        <div class="nav-links" style="flex: 1; justify-content: center;">
+            <a href="citizen_interface.html">Home</a>
+            <a href="Citizen_Laws.html">Citizen Laws</a>
+            <a href="Contacts.html">Contacts</a>
+        </div>
+    </div>
+    <button class="logout-button"onclick="window.location.href='index.html'">Logout</button>
+    <div class="header">Namaste!!</div>
+    <div class="container">
+        <div class="buttons">
+            <button onclick="location.href='report.html'">Report Complaint</button>
+            <button onclick="location.href='check_status.html'">Check Complaint Status</button>
+            <button onclick="location.href='upload_crime.html'">Upload Live Crime</button>
+        </div>
+        <div class="heatmap-container">
+            <div class="heatmap-title">Crime Heat Map</div>
+            <div id="map" class="heatmap"></div>
+        </div>
+    </div>
+    
+    <script>
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([51.5, -0.09]).addTo(map)
+            .bindPopup('A crime incident reported here.')
+            .openPopup();
+    </script>
+</body>
+</html>
